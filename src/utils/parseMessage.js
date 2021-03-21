@@ -6,25 +6,19 @@ const msg = {
 
 const parseMessage = (topic,message) => {
     switch(topic){
-        case 'timestamp/time1':
-            if(msg.time1.length === 5){
+        case 'raspberry-vala/v_z':
+            if(msg.time1.length === 20){
                 msg.time1.shift();
             }
-            msg.time1.push(message);
+            msg.time1.push(Math.round(parseFloat(message)*10000)/10000);
             break;
 
-        case 'timestamp/time2':
-            if(msg.time2.length === 5){
+        case 'raspberry-vala/s_z':
+            if(msg.time2.length === 20){
                 msg.time2.shift();
             }
-            msg.time2.push(message);
+            msg.time2.push(Math.round(parseFloat(message)*10000)/10000);
             break;
-
-        default:
-            if(msg.other.length === 5){
-                msg.other.shift();
-            }
-            msg.other.push(message);
     }
     return msg;
 }
