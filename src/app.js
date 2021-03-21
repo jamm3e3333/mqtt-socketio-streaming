@@ -19,8 +19,10 @@ app.use(express.static(publicPath));
 //urceni portu na kterem bezi webserver
 const port = process.env.PORT || 3050;
 
+const hostLocal = '127.0.0.1';
+const hostRPi = '192.168.1.227'
 //pripojeni mqtt clienta na broker
-var client = mqtt.connect('mqtt://192.168.1.227:1883');
+var client = mqtt.connect(`mqtt://${hostRPi}:1883`);
 //definice serveru a pripojeni socket.io
 const server = http.createServer(app);
 const io = socketio(server);
