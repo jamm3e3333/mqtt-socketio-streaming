@@ -91,7 +91,7 @@ $inputValue_w1.addEventListener('input',(e) => {
         alert('Je povoleno pouze číslo.');
         e.target.focus();
     }
-    
+
     if(!e.target.value){
         $buttonValue_w1.setAttribute('disabled','disabled');
         $buttonValue_w1.classList.remove('green');
@@ -125,6 +125,7 @@ $buttonValue_w1.addEventListener('click', (e) => {
                 status_w1: msg,
             });
             valueW_component.innerHTML = html;
+            valueW_component.setAttribute('style','color: red');
         }
         else{
             console.log(JSON.parse(data.data).error.message, data.value);
@@ -135,6 +136,7 @@ $buttonValue_w1.addEventListener('click', (e) => {
                 value_w1: `, hodnota: ${data.value}`
             });
             valueW_component.innerHTML = html;
+            valueW_component.setAttribute('style','color: dodgerblue');
         }
 
         $inputValue_w1.removeAttribute('disabled');
