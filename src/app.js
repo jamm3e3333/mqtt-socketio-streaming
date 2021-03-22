@@ -6,8 +6,11 @@ const mqtt = require('mqtt');
 const path = require('path');
 const chalk = require('chalk');
 
-//importovani funkce na parsovani topics
+
+//importovani metody na parsovani topics
 const parseMessage = require('./utils/parseMessage.js');
+//importovani metod na posilani requests
+const { getParams, postParams } = require('./utils/req.js');
 
 //urceni public slozky
 const publicPath = path.join(__dirname, '../public/');
@@ -19,15 +22,17 @@ app.use(express.static(publicPath));
 //urceni portu na kterem bezi webserver
 const port = process.env.PORT || 3050;
 
+const hostLocal = '127.0.0.1';
+const hostRPi = '192.168.1.227'
 //pripojeni mqtt clienta na broker
-var client = mqtt.connect('mqtt://192.168.1.227:1883');
+var client = mqtt.connect(`mqtt://${hostRPi}:1883`);
 //definice serveru a pripojeni socket.io
 const server = http.createServer(app);
 const io = socketio(server);
 
 //event na pripojeni mqtt klienta
 client.on('connect', () => {
-    console.log(chalk.blueBright('MQTT klient připojen'));
+    console.log(chalk.blueBright('MQTT klient připojen.'));
     //subscribe na topics
     client.subscribe('raspberry-vala/s_z', (err) => {
         console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
@@ -67,6 +72,21 @@ client.on('offline', () => {
 //event na pripojeni klienta na socket.io
 io.on('connection', (socket) => {
     console.log(`Klient připojen s id: "${socket.id}"`);
+
+    //reques post metoda
+    socket.on('value_w1', (message,cb) => {
+        postParams('W:ycn', message, (error, data) => {
+            if(error){
+                cb(error,undefined);
+            }
+            else{
+                cb(undefined,{
+                    value: message,
+                    data: data.body
+                });
+            }
+        })
+    })
 
     //event disconnect klienta od socket.io
     socket.on('disconnect', () => {
