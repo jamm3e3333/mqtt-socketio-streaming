@@ -102,6 +102,55 @@ var chart4 = new Chart(ctx4,{
         }
     }
 })
+var ctx5 = document.getElementById('myChart5').getContext('2d');
+var chart5 = new Chart(ctx5,{
+    type: 'line',
+    data:{
+        labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],
+        datasets: [{
+            label: 'Ryhlost v ose x',
+            backgroundColor: 'rgba(255, 255, 255,0)',
+            borderColor: 'rgb(255, 99, 132)',
+            borderCapStyle: 'square',
+            borderWidth: 5,
+            borderJoinStyle: 'bevel',
+            pointBorderWidth: 0,
+            pointRadius: 0,
+            cubicInterpolationMode: 'monotone',
+            data: []
+        }]
+    },
+    options: {
+        tooltips: {
+            enabled: false
+        }
+    }
+})
+
+var ctx6 = document.getElementById('myChart6').getContext('2d');
+var chart6 = new Chart(ctx6,{
+    type: 'line',
+    data:{
+        labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],
+        datasets: [{
+            label: 'Poloha v ose x',
+            backgroundColor: 'rgba(255, 255, 255,0)',
+            borderColor: 'rgb(255, 99, 132)',
+            borderCapStyle: 'square',
+            borderWidth: 5,
+            borderJoinStyle: 'bevel',
+            pointBorderWidth: 0,
+            pointRadius: 0,
+            cubicInterpolationMode: 'monotone',
+            data: []
+        }]
+    },
+    options: {
+        tooltips: {
+            enabled: false
+        }
+    }
+})
 
 /////////////////////////////////////////////////////////////////
 //elements from html
@@ -137,6 +186,12 @@ socket.on('message', (message) => {
 
     chart4.data.datasets[0].data = message.s_y;
     chart4.update();
+
+    chart5.data.datasets[0].data = message.v_x;
+    chart5.update();
+
+    chart6.data.datasets[0].data = message.s_x;
+    chart6.update();
 })
 
 

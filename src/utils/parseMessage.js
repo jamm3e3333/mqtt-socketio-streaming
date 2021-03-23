@@ -3,6 +3,8 @@ const msg = {
     s_z: [],
     v_y: [],
     s_y: [],
+    v_x: [],
+    s_x: [],
     other: []
 }
 
@@ -34,6 +36,20 @@ const parseMessage = (topic,message) => {
                     msg.s_y.shift();
                 }
                 msg.s_y.push(Math.round(parseFloat(message)*10000)/10000);
+                break;
+
+            case 'raspberry-vala/v_x':
+                if(msg.v_x.length === 100){
+                    msg.v_x.shift();
+                }
+                msg.v_x.push(Math.round(parseFloat(message)*10000)/10000);
+                break;
+
+            case 'raspberry-vala/s_x':
+                if(msg.s_x.length === 100){
+                    msg.s_x.shift();
+                }
+                msg.s_x.push(Math.round(parseFloat(message)*10000)/10000);
                 break;
     }
     return msg;

@@ -35,37 +35,55 @@ client.on('connect', () => {
     console.log(chalk.blueBright('MQTT klient připojen.'));
     //subscribe na topics
     client.subscribe('raspberry-vala/s_y', (err) => {
-        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+        console.log(chalk.blueBright('Proběhl subscribe na topic s_y.'));
         if(err){
             console.log(chalk.red(`
-                Chyba při subscribe na topics.\n
+                Chyba při subscribe na topic s_y.\n
                 Error: ${err}
             `))
         }
     })
     client.subscribe('raspberry-vala/v_y', (err) => {
-        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+        console.log(chalk.blueBright('Proběhl subscribe na topic v_y.'));
         if(err){
             console.log(chalk.red(`
-                Chyba při subscribe na topics.\n
+                Chyba při subscribe na topic v_y.\n
                 Error: ${err}
             `))
         }
     })
     client.subscribe('raspberry-vala/v_z', (err) => {
-        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+        console.log(chalk.blueBright('Proběhl subscribe na topic v_z.'));
         if(err){
             console.log(chalk.red(`
-                Chyba při subscribe na topics.\n
+                Chyba při subscribe na topic v_z.\n
                 Error: ${err}
             `))
         }
     })
     client.subscribe('raspberry-vala/s_z', (err) => {
-        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+        console.log(chalk.blueBright('Proběhl subscribe na topic s_z.'));
         if(err){
             console.log(chalk.red(`
-                Chyba při subscribe na topics.\n
+                Chyba při subscribe na topic s_z.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/v_x', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na topic v_x.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topic v_x.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/s_x', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na topic s_x.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topic s_x.\n
                 Error: ${err}
             `))
         }
