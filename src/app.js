@@ -34,7 +34,16 @@ const io = socketio(server);
 client.on('connect', () => {
     console.log(chalk.blueBright('MQTT klient připojen.'));
     //subscribe na topics
-    client.subscribe('raspberry-vala/s_z', (err) => {
+    client.subscribe('raspberry-vala/s_y', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topics.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/v_y', (err) => {
         console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
         if(err){
             console.log(chalk.red(`
@@ -44,6 +53,15 @@ client.on('connect', () => {
         }
     })
     client.subscribe('raspberry-vala/v_z', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topics.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/s_z', (err) => {
         console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
         if(err){
             console.log(chalk.red(`
@@ -63,7 +81,7 @@ client.on('message', (topic,message) => {
 //event na odpojeni mqtt klienta od brokeru
 client.on('offline', () => {
     console.log(chalk.red('MQTT broker je offline.'));
-    client.unsubscribe('timestamp/#', () => {
+    client.unsubscribe('raspberry-vala/#', () => {
         //cb 
     })
 })
@@ -74,10 +92,13 @@ io.on('connection', (socket) => {
     console.log(`Klient připojen s id: "${socket.id}"`);
 
     //reques post metoda
-    socket.on('value_w1', (message,cb) => {
-        postParams('W:ycn', message, (error, data) => {
+    socket.on('value_w', (message, i,cb) => {
+        postParams(`W${i}:ycn`, message, (error, data) => {
             if(error){
                 cb(error,undefined);
+                console.log(chalk.redBright(`
+                    ${error} pro hodnotu W${i}:ycn
+                `));
             }
             else{
                 cb(undefined,{
@@ -96,5 +117,5 @@ io.on('connection', (socket) => {
 
 //event na naslouchani
 server.listen(port, () => {
-    console.log(`Server naslouchá na portu: "${port}"`);
+    console.log(chalk.inverse.greenBright(`Server naslouchá na portu: "${port}"`));
 })
