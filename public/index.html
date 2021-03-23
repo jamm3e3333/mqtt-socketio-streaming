@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <title>Socket.io test</title>
+    <title>HIL simulator</title>
 </head>
 <body>
     
 </body>
     <div class="container m-4">
-        <h1>HIL simulátor Jakuba Valy</h1>
+        <div class="col-md-6 offset-md-5">
+            <h1>HIL simulátor</h1>
+        </div>
     </div>
+    <hr />
     <div id="time-component"></div>
     <div class="container">
 
@@ -40,6 +43,15 @@
             </div>
             <div class="col-md-6">
                 <canvas width="400" height="200" id="myChart6"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <canvas width="400" height="200" id="myChart7"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas width="400" height="200" id="myChart8"></canvas>
             </div>
         </div>
 
@@ -97,23 +109,6 @@
 
                 </div>
             </div>
-            <!-- úhlový rychlost v ose z omega-z -->
-            <div class="row offset-md-1 mt-1 mb-1">
-                <div class="col-md-3">
-                    <label>Žádaná veličina - úh. rychl. v ose X:</label>
-                </div>
-                <div class="col-md-3">
-                    <input  id="input-value-w4"
-                            type="input"
-                            placeholder="omega-z..." />
-                </div>
-                <div class="col-md-2">
-                    <button id="btn-value-w4">Změň hodnotu</button>
-                </div>
-                <div class="col-md-1" id="value-w4-component">
-
-                </div>
-            </div>
         </div>
     </form>
     <script id="time-template" type="text/html">
@@ -136,11 +131,6 @@
 
     <!-- render template for value w3 -->
     <script id="value-w3-template" type="text/html">
-        <p>{{status_w}}{{value_w}}</p>
-    </script>
-
-    <!-- render template for value w4 -->
-    <script id="value-w4-template" type="text/html">
         <p>{{status_w}}{{value_w}}</p>
     </script>
 

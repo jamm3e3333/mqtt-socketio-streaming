@@ -177,7 +177,6 @@ var chart5 = new Chart(ctx5,{
     data:{
         labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],
         datasets: [{
-            label: 'Ryhlost v ose x',
             backgroundColor: 'rgba(255, 255, 255,0)',
             borderColor: 'rgb(255, 99, 132)',
             borderCapStyle: 'square',
@@ -192,6 +191,20 @@ var chart5 = new Chart(ctx5,{
     options: {
         tooltips: {
             enabled: false
+        },
+        title: {
+            display: true,
+            text: 'Ryhlost v ose x',
+            position: 'top',
+            fontSize: 12,
+            fontFamily: 'Helvetica',
+            fontColor: 'dodgerblue',
+            fontStyle: 'bold',
+            padding: 15,
+            lineHeight: 1.2
+        },
+        legend: {
+            display: false
         },
         scales: {
             yAxes: [{
@@ -255,6 +268,80 @@ var chart6 = new Chart(ctx6,{
     }
 })
 
+var ctx7 = document.getElementById('myChart7').getContext('2d');
+var chart7 = new Chart(ctx7,{
+    type: 'scatter',
+    data:{
+        
+        datasets: [{
+            label: 'Poloha x-y',
+            backgroundColor: 'rgba(255, 255, 255,0)',
+            borderColor: 'rgb(255, 99, 132)',
+            pointBorderWidth: 3,
+            pointRadius: 2,
+            data: []
+        }]
+    },
+    options: {
+        tooltips: {
+            enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-x',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'poloha v ose x [m]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-y',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'poloha v ose y [m]'
+                }
+            }]
+        }
+    }
+})
+
+var ctx8 = document.getElementById('myChart8').getContext('2d');
+var chart8 = new Chart(ctx8,{
+    type: 'scatter',
+    data:{
+        
+        datasets: [{
+            label: 'Poloha z-x',
+            backgroundColor: 'rgba(255, 255, 255,0)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: []
+        }]
+    },
+    options: {
+        tooltips: {
+            enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-z',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'poloha v ose z [m]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-x',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'poloha v ose  x [m]'
+                }
+            }]
+        }
+    }
+})
+
 /////////////////////////////////////////////////////////////////
 //elements from html
 const testComponent = document.querySelector('#time-component');
@@ -268,13 +355,11 @@ const valueW_templates_array = [];
 valueW_templates_array[0] = document.querySelector('#value-w1-template').innerHTML;
 valueW_templates_array[1] = document.querySelector('#value-w2-template').innerHTML;
 valueW_templates_array[2] = document.querySelector('#value-w3-template').innerHTML;
-valueW_templates_array[3] = document.querySelector('#value-w4-template').innerHTML;
 
 const valueW_components_array = [];
 valueW_components_array[0] = document.querySelector('#value-w1-component');
 valueW_components_array[1] = document.querySelector('#value-w2-component');
 valueW_components_array[2] = document.querySelector('#value-w3-component');
-valueW_components_array[3] = document.querySelector('#value-w4-component');
 
 
 socket.on('message', (message) => {
@@ -295,6 +380,12 @@ socket.on('message', (message) => {
 
     chart6.data.datasets[0].data = message.s_x;
     chart6.update();
+
+    chart7.data.datasets[0].data = message.x_y;
+    chart7.update();
+
+    chart8.data.datasets[0].data = message.z_x;
+    chart8.update();
 })
 
 
