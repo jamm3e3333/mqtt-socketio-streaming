@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.static(publicPath));
 
 //urceni portu na kterem bezi webserver
-const port = process.env.PORT || 3050;
+const port = process.env.PORT || 3051;
 
 const hostLocal = '127.0.0.1';
 const hostRPi = '192.168.1.227'

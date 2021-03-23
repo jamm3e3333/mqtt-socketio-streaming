@@ -24,6 +24,23 @@ var chart1 = new Chart(ctx1,{
     options: {
         tooltips: {
             enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-v_z',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'v [m/s]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-v_z',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'n'
+                }
+            }]
         }
     }
 });
@@ -49,6 +66,23 @@ var chart2 = new Chart(ctx2,{
     options: {
         tooltips: {
             enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-s_z',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 's [m]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-s_z',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'n'
+                }
+            }]
         }
     }
 })
@@ -74,6 +108,23 @@ var chart3 = new Chart(ctx3,{
     options: {
         tooltips: {
             enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-v_y',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'v [m/s]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-v_y',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'n'
+                }
+            }]
         }
     }
 })
@@ -99,9 +150,27 @@ var chart4 = new Chart(ctx4,{
     options: {
         tooltips: {
             enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-s_y',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 's [m]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-s_y',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'n'
+                }
+            }]
         }
     }
 })
+
 var ctx5 = document.getElementById('myChart5').getContext('2d');
 var chart5 = new Chart(ctx5,{
     type: 'line',
@@ -123,6 +192,23 @@ var chart5 = new Chart(ctx5,{
     options: {
         tooltips: {
             enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-v_x',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'v [m/s]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-v_x',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'n'
+                }
+            }]
         }
     }
 })
@@ -148,6 +234,23 @@ var chart6 = new Chart(ctx6,{
     options: {
         tooltips: {
             enabled: false
+        },
+        scales: {
+            yAxes: [{
+                id: 'y-axis-s_x',
+                type: 'linear',
+                scaleLabel: {
+                    display: true,
+                    labelString: 's [m]'
+                }
+            }],
+            xAxes: [{
+                id: 'x-axis-s_x',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'n'
+                }
+            }]
         }
     }
 })
