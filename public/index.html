@@ -11,22 +11,43 @@
     
 </body>
     <div class="container m-4">
-        <h1>Vítejte na serveru Jakuba Valy</h1>
+        <h1>HIL simulátor Jakuba Valy</h1>
     </div>
     <div id="time-component"></div>
-    <div class="container-fluid">
-        <div class="row offset-md-1">
-            <div class="col-md-5">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
                 <canvas width="400" height="200" id="myChart1"></canvas>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <canvas width="400" height="200" id="myChart2"></canvas>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <canvas width="400" height="200" id="myChart3"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas width="400" height="200" id="myChart4"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <canvas width="400" height="200" id="myChart5"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas width="400" height="200" id="myChart6"></canvas>
+            </div>
+        </div>
+
     </div>
     <form name="form-w1" id="f1">
-        <div class="container-fluid m-4">
-            <div class="row offset-md-1">
+        <div class="container m-4">
+            <!-- rychlost v-z -->
+            <div class="row offset-md-1 mt-1 mb-1">
                 <div class="col-md-3">
                     <label>Žádaná veličina - rychlost v ose Z:</label>
                 </div>
@@ -38,7 +59,58 @@
                 <div class="col-md-2">
                     <button id="btn-value-w1">Změň hodnotu</button>
                 </div>
-                <div class="col-md-2" id="value-w1-component">
+                <div class="col-md-1" id="value-w1-component">
+
+                </div>
+            </div>
+            <!-- rychlost v-y -->
+            <div class="row offset-md-1 mt-1 mb-1">
+                <div class="col-md-3">
+                    <label>Žádaná veličina - rychlost v ose Y:</label>
+                </div>
+                <div class="col-md-3">
+                    <input  id="input-value-w2"
+                            type="input"
+                            placeholder="v-y..." />
+                </div>
+                <div class="col-md-2">
+                    <button id="btn-value-w2">Změň hodnotu</button>
+                </div>
+                <div class="col-md-1" id="value-w2-component">
+
+                </div>
+            </div>
+            <!-- rychlost v ose y v-x -->
+            <div class="row offset-md-1 mt-1 mb-1">
+                <div class="col-md-3">
+                    <label>Žádaná veličina - rychlost v ose X:</label>
+                </div>
+                <div class="col-md-3">
+                    <input  id="input-value-w3"
+                            type="input"
+                            placeholder="v-x..." />
+                </div>
+                <div class="col-md-2">
+                    <button id="btn-value-w3">Změň hodnotu</button>
+                </div>
+                <div class="col-md-1" id="value-w3-component">
+
+                </div>
+            </div>
+            <!-- úhlový rychlost v ose z omega-z -->
+            <div class="row offset-md-1 mt-1 mb-1">
+                <div class="col-md-3">
+                    <label>Žádaná veličina - úh. rychl. v ose X:</label>
+                </div>
+                <div class="col-md-3">
+                    <input  id="input-value-w4"
+                            type="input"
+                            placeholder="omega-z..." />
+                </div>
+                <div class="col-md-2">
+                    <button id="btn-value-w4">Změň hodnotu</button>
+                </div>
+                <div class="col-md-1" id="value-w4-component">
 
                 </div>
             </div>
@@ -52,8 +124,24 @@
         </div>
     </script>
 
+    <!-- render template for value w1 -->
     <script id="value-w1-template" type="text/html">
-        <p>{{status_w1}}{{value_w1}}</p>
+        <p>{{status_w}}{{value_w}}</p>
+    </script>
+
+    <!-- render template for value w2 -->
+    <script id="value-w2-template" type="text/html">
+        <p>{{status_w}}{{value_w}}</p>
+    </script>
+
+    <!-- render template for value w3 -->
+    <script id="value-w3-template" type="text/html">
+        <p>{{status_w}}{{value_w}}</p>
+    </script>
+
+    <!-- render template for value w4 -->
+    <script id="value-w4-template" type="text/html">
+        <p>{{status_w}}{{value_w}}</p>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>

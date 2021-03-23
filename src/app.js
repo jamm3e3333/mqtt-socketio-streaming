@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.static(publicPath));
 
 //urceni portu na kterem bezi webserver
-const port = process.env.PORT || 3050;
+const port = process.env.PORT || 3051;
 
 const hostLocal = '127.0.0.1';
 const hostRPi = '192.168.1.227'
@@ -34,20 +34,56 @@ const io = socketio(server);
 client.on('connect', () => {
     console.log(chalk.blueBright('MQTT klient připojen.'));
     //subscribe na topics
-    client.subscribe('raspberry-vala/s_z', (err) => {
-        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+    client.subscribe('raspberry-vala/s_y', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na topic s_y.'));
         if(err){
             console.log(chalk.red(`
-                Chyba při subscribe na topics.\n
+                Chyba při subscribe na topic s_y.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/v_y', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na topic v_y.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topic v_y.\n
                 Error: ${err}
             `))
         }
     })
     client.subscribe('raspberry-vala/v_z', (err) => {
-        console.log(chalk.blueBright('Proběhl subscribe na dané topics.'));
+        console.log(chalk.blueBright('Proběhl subscribe na topic v_z.'));
         if(err){
             console.log(chalk.red(`
-                Chyba při subscribe na topics.\n
+                Chyba při subscribe na topic v_z.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/s_z', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na topic s_z.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topic s_z.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/v_x', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na topic v_x.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topic v_x.\n
+                Error: ${err}
+            `))
+        }
+    })
+    client.subscribe('raspberry-vala/s_x', (err) => {
+        console.log(chalk.blueBright('Proběhl subscribe na topic s_x.'));
+        if(err){
+            console.log(chalk.red(`
+                Chyba při subscribe na topic s_x.\n
                 Error: ${err}
             `))
         }
@@ -63,7 +99,7 @@ client.on('message', (topic,message) => {
 //event na odpojeni mqtt klienta od brokeru
 client.on('offline', () => {
     console.log(chalk.red('MQTT broker je offline.'));
-    client.unsubscribe('timestamp/#', () => {
+    client.unsubscribe('raspberry-vala/#', () => {
         //cb 
     })
 })
@@ -74,10 +110,13 @@ io.on('connection', (socket) => {
     console.log(`Klient připojen s id: "${socket.id}"`);
 
     //reques post metoda
-    socket.on('value_w1', (message,cb) => {
-        postParams('W:ycn', message, (error, data) => {
+    socket.on('value_w', (message, i,cb) => {
+        postParams(`W${i}:ycn`, message, (error, data) => {
             if(error){
                 cb(error,undefined);
+                console.log(chalk.redBright(`
+                    ${error} pro hodnotu W${i}:ycn
+                `));
             }
             else{
                 cb(undefined,{
@@ -96,5 +135,5 @@ io.on('connection', (socket) => {
 
 //event na naslouchani
 server.listen(port, () => {
-    console.log(`Server naslouchá na portu: "${port}"`);
+    console.log(chalk.inverse.greenBright(`Server naslouchá na portu: "${port}"`));
 })
