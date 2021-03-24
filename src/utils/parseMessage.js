@@ -5,6 +5,8 @@ const msg = {
     s_y: [],
     v_x: [],
     s_x: [],
+    x_y: [],
+    z_x: [],
     other: []
 }
 
@@ -52,6 +54,30 @@ const parseMessage = (topic,message) => {
             msg.s_x.push(Math.round(parseFloat(message)*10000)/10000);
             break;
     }
+    //////////////////////////////////////////////////////////////////////
+    //pushing data as object to the x_y array 
+    if(msg.s_x.length && msg.s_y.length){
+        if(msg.x_y.length === 100){
+            msg.x_y.shift();
+        }
+        msg.x_y.push({
+            x: msg.s_y[msg.s_y.length-1],
+            y: msg.s_x[msg.s_y.length-1]
+        })
+    }
+
+    //////////////////////////////////////////////////////////////////////
+    //pushing data as object to the z_x array 
+    if(msg.s_x.length && msg.s_z.length){
+        if(msg.z_x.length === 100){
+            msg.z_x.shift();
+        }
+        msg.z_x.push({
+            x: msg.s_x[msg.s_x.length-1],
+            y: msg.s_z[msg.s_z.length-1]
+        })
+    }
+    
     return msg;
 }
 

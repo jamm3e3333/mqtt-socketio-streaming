@@ -29,10 +29,12 @@ var client = mqtt.connect(`mqtt://${hostRPi}:1883`);
 //definice serveru a pripojeni socket.io
 const server = http.createServer(app);
 const io = socketio(server);
-
+mqttStatus = '';
 //event na pripojeni mqtt klienta
 client.on('connect', () => {
     console.log(chalk.blueBright('MQTT klient připojen.'));
+    mqttStatus = 'ON';
+    io.emit('mqtt_status', mqttStatus);
     //subscribe na topics
     client.subscribe('raspberry-vala/s_y', (err) => {
         console.log(chalk.blueBright('Proběhl subscribe na topic s_y.'));
@@ -90,7 +92,6 @@ client.on('connect', () => {
     })
 })
 
-
 //event na prijeti zpravy na subscribed topics
 client.on('message', (topic,message) => {
     io.emit('message', parseMessage(topic,message.toString()));
@@ -98,6 +99,8 @@ client.on('message', (topic,message) => {
 
 //event na odpojeni mqtt klienta od brokeru
 client.on('offline', () => {
+    mqttStatus = 'OFF';
+    io.emit('mqtt_status', mqttStatus);
     console.log(chalk.red('MQTT broker je offline.'));
     client.unsubscribe('raspberry-vala/#', () => {
         //cb 
@@ -105,10 +108,12 @@ client.on('offline', () => {
 })
 
 
+
 //event na pripojeni klienta na socket.io
 io.on('connection', (socket) => {
     console.log(`Klient připojen s id: "${socket.id}"`);
 
+    io.emit('mqtt_status', mqttStatus);
     //reques post metoda
     socket.on('value_w', (message, i,cb) => {
         postParams(`W${i}:ycn`, message, (error, data) => {
