@@ -45,14 +45,18 @@ var chart1 = new Chart(ctx1,{
                 type: 'linear',
                 scaleLabel: {
                     display: true,
-                    labelString: 'v [m/s]'
+                    labelString: 'v [m/s]',
+                    fontSize: 13,
+                    fontColor: 'rgb(255,0,0)'
                 }
             }],
             xAxes: [{
                 id: 'x-axis-v_z',
                 scaleLabel: {
                     display: true,
-                    labelString: 'n - počet vzorků'
+                    labelString: 'n - počet vzorků',
+                    fontSize: 13,
+                    fontColor: 'rgb(255,0,0)'
                 }
             }]
         }
@@ -100,14 +104,18 @@ var chart2 = new Chart(ctx2,{
                 type: 'linear',
                 scaleLabel: {
                     display: true,
-                    labelString: 's [m]'
+                    labelString: 's [m]',
+                    fontSize: 13,
+                    fontColor: 'rgb(255,0,0)'
                 }
             }],
             xAxes: [{
                 id: 'x-axis-s_z',
                 scaleLabel: {
                     display: true,
-                    labelString: 'n - počet vzorků'
+                    labelString: 'n - počet vzorků',
+                    fontSize: 13,
+                    fontColor: 'rgb(255,0,0)'
                 }
             }]
         }
