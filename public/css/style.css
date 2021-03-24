@@ -6,3 +6,32 @@
     background-color: #4ef28a;
 }
 
+ul {
+    list-style-type: none;
+    display: block;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #000000b6;
+  }
+  
+  li {
+    /* float: center; */
+    display: inline-block;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  
+  li a:hover{
+    color: white;
+    background-color: #24ca77;
+  }
+
