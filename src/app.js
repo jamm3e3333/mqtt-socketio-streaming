@@ -9,15 +9,20 @@ const chalk = require('chalk');
 
 //importovani metody na parsovani topics
 const parseMessage = require('./utils/parseMessage.js');
-//importovani metod na posilani requests
-const { getParams, postParams } = require('./utils/req.js');
 
 //urceni public slozky
+const chartjsPath = path.join(__dirname, '../node_modules/chart.js/dist/');
+const mustachePath = path.join(__dirname,'../node_modules/mustache/');
+const bootstrapPath = path.join(__dirname, '../node_modules/bootstrap/dist/css/');
 const publicPath = path.join(__dirname, '../public/');
 //definice app funkce
 const app = express();
+
 app.use(express.json());
 app.use(express.static(publicPath));
+app.use('/chartjs', express.static(chartjsPath));
+app.use('/mustache', express.static(mustachePath));
+app.use('/bootstrap', express.static(bootstrapPath));
 
 //urceni portu na kterem bezi webserver
 const port = process.env.PORT || 3051;
@@ -114,22 +119,14 @@ io.on('connection', (socket) => {
     console.log(`Klient připojen s id: "${socket.id}"`);
 
     io.emit('mqtt_status', mqttStatus);
-    //reques post metoda
-    socket.on('value_w', (message, i,cb) => {
-        postParams(`W${i}:ycn`, message, (error, data) => {
-            if(error){
-                cb(error,undefined);
-                console.log(chalk.redBright(`
-                    ${error} pro hodnotu W${i}:ycn
-                `));
+    //publish
+    socket.on('value_w', (message, i, cb) => {
+        client.publish(`raspberry-vala/W${i}`,message.toString(), (err) => {
+            if(err){
+                return cb("NOT OK",undefined);
             }
-            else{
-                cb(undefined,{
-                    value: message,
-                    data: data.body
-                });
-            }
-        })
+            cb(undefined, "OK");
+        });
     })
 
     //event disconnect klienta od socket.io

@@ -1,7 +1,5 @@
 const socket = io();
 
-/////////////////////////////////////////////////////////////////
-//chartjs element
 var ctx1 = document.getElementById('myChart1').getContext('2d');
 var chart1 = new Chart(ctx1,{
     type: 'line',
@@ -475,6 +473,7 @@ var chart8 = new Chart(ctx8,{
     }
 })
 
+
 /////////////////////////////////////////////////////////////////
 //elements from html
 const testComponent = document.querySelector('#time-component');
@@ -547,9 +546,11 @@ inputs_w = Array.from(inputs_w);
 
 inputs_w.forEach((input, i) => {
     input.addEventListener('input', (e) => {
-        if(isNaN(parseFloat(e.target.value)) === true && (e.target.value !== '' && e.target.value !== '-')){
-            e.target.value = '';
-            alert('Je povoleno pouze číslo.');
+        if(!e.target.value.toString().match(/^\-?\d*\.?\d*$/)){
+            let arr ='';
+            arr = e.target.value.toString().split('');
+            arr.pop();
+            e.target.value = arr.join('');
             e.target.focus();
         }
     
@@ -576,12 +577,11 @@ buttons_w.forEach((button, i) => {
         e.target.classList.add('red');
         e.target.classList.remove('green');
 
-        let msg = '';
         const value_w = parseFloat(inputs_w[i].value.trim());
         inputs_w[i].value = '';
         inputs_w[i].setAttribute('disabled','disabled');
 
-        socket.emit('value_w', value_w, (i+1), (error,data) => {
+        socket.emit('value_w', value_w, (i+1), (error, data) => {
             if(error){
                 console.log(error,i);
                 msg = 'HIL simulátor je offline.';
@@ -593,18 +593,16 @@ buttons_w.forEach((button, i) => {
                 valueW_components_array[i].setAttribute('style','color: red');
             }
             else{
-                msg = JSON.parse(data.data).error.message;
-    
                 const html = Mustache.render(valueW_templates_array[i], {
-                    status_w: msg,
-                    value_w: `, hodnota: ${data.value}`
+                    status_w: "OK",
+                    value_w: `, hodnota: ${value_w}`
                 });
                 valueW_components_array[i].innerHTML = html;
                 valueW_components_array[i].setAttribute('style','color: dodgerblue');
             }
-            window.scrollTo(0,document.querySelector('body').offsetHeight/2);
             inputs_w[i].removeAttribute('disabled');
             inputs_w[i].focus();
-        })
+        });
+        
     })
 })
