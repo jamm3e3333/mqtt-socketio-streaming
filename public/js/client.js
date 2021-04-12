@@ -581,28 +581,15 @@ buttons_w.forEach((button, i) => {
         inputs_w[i].value = '';
         inputs_w[i].setAttribute('disabled','disabled');
 
-        socket.emit('value_w', value_w, (i+1), (error, data) => {
-            if(error){
-                console.log(error,i);
-                msg = 'HIL simulátor je offline.';
-    
-                const html = Mustache.render(valueW_templates_array[i], {
-                    status_w: msg,
-                });
-                valueW_components_array[i].innerHTML = html;
-                valueW_components_array[i].setAttribute('style','color: red');
-            }
-            else{
-                const html = Mustache.render(valueW_templates_array[i], {
-                    status_w: "OK",
-                    value_w: `, hodnota: ${value_w}`
-                });
-                valueW_components_array[i].innerHTML = html;
-                valueW_components_array[i].setAttribute('style','color: dodgerblue');
-            }
+        socket.emit('value_w', value_w, (i+1));
+            const html = Mustache.render(valueW_templates_array[i], {
+                status_w: "OK",
+                value_w: `, hodnota: ${value_w}`
+            });
+            valueW_components_array[i].innerHTML = html;
+            valueW_components_array[i].setAttribute('style','color: dodgerblue');
             inputs_w[i].removeAttribute('disabled');
             inputs_w[i].focus();
-        });
         
     })
 })

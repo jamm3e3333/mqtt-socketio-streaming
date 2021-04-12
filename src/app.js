@@ -120,13 +120,8 @@ io.on('connection', (socket) => {
 
     io.emit('mqtt_status', mqttStatus);
     //publish
-    socket.on('value_w', (message, i, cb) => {
-        client.publish(`raspberry-vala/W${i}`,message.toString(), (err) => {
-            if(err){
-                return cb("NOT OK",undefined);
-            }
-            cb(undefined, "OK");
-        });
+    socket.on('value_w', (message, i) => {
+        client.publish(`raspberry-vala/W${i}`,message.toString());
     })
 
     //event disconnect klienta od socket.io
