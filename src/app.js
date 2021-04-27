@@ -29,8 +29,9 @@ const port = process.env.PORT || 3051;
 
 const hostLocal = '127.0.0.1';
 const hostRPi = '192.168.1.227'
+const hostRPiEth = '169.254.64.159';
 //pripojeni mqtt clienta na broker
-var client = mqtt.connect(`mqtt://${hostRPi}:1883`);
+var client = mqtt.connect(`mqtt://${hostRPiEth}:1883`);
 //definice serveru a pripojeni socket.io
 const server = http.createServer(app);
 const io = socketio(server);
